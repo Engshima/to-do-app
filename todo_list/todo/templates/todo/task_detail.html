@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <article class="task">
+        <header>
+            <h2>{{task.title}}</h2>
+            <span class="badge  {% if  task.completed%}badge-completed {% else %}badge-pending {% endif %}">
+                {% if task.completed %}completed {% else %}pending{% endif %}
+
+            </span>
+
+        </header>
+        <p>{{task.description}}</p>
+    </article>
+{% endblock content %}
+    
