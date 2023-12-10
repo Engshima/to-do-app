@@ -4,7 +4,7 @@
   <div class="center">
     <form method="POST" novalidate class="card">
               {% csrf_token %}
-               <h2>Create Task</h2>
+               <h2> {% if task  %} Update {% else %} Create {% endif %} Task</h2>
 
                {% for field in form %}
                     {% if field.name == completed %}
