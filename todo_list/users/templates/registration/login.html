@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <di class="center">
+        <form method="POST">
+            {% csrf_token %}
+            <h2 class="text-center">Login To Your Account</h2>
+            
+            {% for field in form  %}
+               {{field.label_tag}}
+                       {{field}}  
+                       {% if field.errors %}
+                          <small>{{field.errors | striptags}}</small>
+                       {% endif %}              
+            {% endfor %}
+                <input type="submit" value="Login" class="btn btn-primary full-width">
+                <hr>
+                {% comment %}  #The <hr> element is most often displayed as a horizontal rule that is used to separate content (or define a change) in an HTML page. {% endcomment %}
+                <p class="text-center">Forgot Your Password?<a href="#">Reset Your Password</a></p>
+                <p class="text-center">Don't have a account? <a href="#">Join Now</a></p>
+
+        </form>
+    </div>
+{% endblock content %}
+    
