@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView 
 from django.contrib import messages
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -14,4 +14,6 @@ class MyLoginView(LoginView):
     def form_invalid(self,form):
         messages.error(self.request,"Invalid username or password")
         return self.render_to_response(self.get_context_data(form=form))
-        
+
+ 
+           
