@@ -16,7 +16,7 @@
                 <input type="submit" value="Login" class="btn btn-primary full-width">
                 <hr>
                 {% comment %}  #The <hr> element is most often displayed as a horizontal rule that is used to separate content (or define a change) in an HTML page. {% endcomment %}
-                <p class="text-center">Forgot Your Password?<a href="#">Reset Your Password</a></p>
+                <p class="text-center">Forgot Your Password?<a href="{% url 'users:password-reset' %}">Reset Your Password</a></p>
                 <p class="text-center">Don't have a account? <a href="{% url 'users:register' %}">Join Now</a></p>
 
         </form>
