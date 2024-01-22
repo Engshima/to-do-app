@@ -131,5 +131,5 @@ LOGIN_URL = 'users:login'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PORT = 25
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'sh.vatanpourasl@gmail.com'
-EMAIL_HOST_PASSWORD = 'phd1400shima'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
