@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from .forms import RegisterForm
 from django.views.generic.edit import FormView
+from django.contrib.auth import login
 
 # Create your views here.
 

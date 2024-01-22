@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'todo',
     'users',
+   
 ]
 
 MIDDLEWARE = [
@@ -126,4 +127,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'users:login'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PORT = 25
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sh.vatanpourasl@gmail.com'
+EMAIL_HOST_PASSWORD = 'phd1400shima'
