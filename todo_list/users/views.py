@@ -1,11 +1,19 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView 
 from django.contrib import messages
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from .forms import RegisterForm
 from django.views.generic.edit import FormView
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+from .forms import ProfileUpdateForm, UpdateUserForm
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
+
+
 
 # Create your views here.
 
@@ -31,4 +39,34 @@ class RegisterView(FormView):
         if user:
             login(self.request,user)
         return super(RegisterView,self).form_valid(form)    
+
+class MyProfile(LoginRequiredMixin, View):
+    def get(self,request):
+        user_form = UpdateUserForm(instance=request.user)
+        user_Profile = ProfileUpdateForm(instance=request.user.profile)
+        
+        context ={
+            'user_form':user_form,
+            'user_Profile':user_Profile
+        }
+        
+        return render(request,'registration/profile.html', context)
+    
+    def post(self,request):
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES ,instance=request.user.profile)
+        
+        if user_form.is_valid()  and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "your profile has been updated successfully")
+            return redirect('profile')
+        
+        else:
+            context = {
+                'user_form':user_form,
+                'profile_form':profile_form
+                }
             
+            messages.error(request, "Error updating you profile")
+            return render(request, 'registration/profile.html', context)

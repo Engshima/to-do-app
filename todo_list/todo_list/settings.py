@@ -133,3 +133,8 @@ EMAIL_HOST_PORT = 25
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
+
+
+### media settings
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
