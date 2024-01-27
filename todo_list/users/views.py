@@ -43,11 +43,11 @@ class RegisterView(FormView):
 class MyProfile(LoginRequiredMixin, View):
     def get(self,request):
         user_form = UpdateUserForm(instance=request.user)
-        user_Profile = ProfileUpdateForm(instance=request.user.profile)
+        profile_form= ProfileUpdateForm(instance=request.user.profile)
         
         context ={
             'user_form':user_form,
-            'user_Profile':user_Profile
+            'profile_form':profile_form
         }
         
         return render(request,'registration/profile.html', context)
@@ -56,17 +56,31 @@ class MyProfile(LoginRequiredMixin, View):
         user_form = UpdateUserForm(request.POST, instance=request.user)
         profile_form = ProfileUpdateForm(request.POST, request.FILES ,instance=request.user.profile)
         
-        if user_form.is_valid()  and profile_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
             messages.success(request, "your profile has been updated successfully")
             return redirect('profile')
+        
+        
         
         else:
             context = {
                 'user_form':user_form,
                 'profile_form':profile_form
                 }
+                         # Display form validation errors
+            for field in user_form:
+              if field.errors:
+                    messages.error(request, f"Error in {field.label}: {', '.join(field.errors)}")
+    
+            for field in profile_form:
+                if field.errors:
+                 messages.error(request, f"Error in {field.label}: {', '.join(field.errors)}")
+    
+                return render(request, 'registration/profile.html', context)
+            
+                    
             
             messages.error(request, "Error updating you profile")
             return render(request, 'registration/profile.html', context)
